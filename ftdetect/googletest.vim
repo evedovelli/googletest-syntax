@@ -9,6 +9,19 @@ func! s:DetectGoogleTest()
     if getline(i) =~# '#include "gtest/gtest.h"'
       set ft=googletest
     endif
+    if getline(i) =~# '#include <gtest/gtest.h>'
+      set ft=googletest
+    endif
+    let i += 1
+  endwhile
+  let j = 1
+  while i < 100
+    if getline(i) =~# 'TEST('
+      set ft=googletest
+    endif
+    if getline(i) =~# 'TEST_F('
+      set ft=googletest
+    endif
     let i += 1
   endwhile
 endfun
